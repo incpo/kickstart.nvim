@@ -181,9 +181,13 @@ vim.opt.rnu = true
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
+-- Terminal
+-- vim.keymap.set('n', '<leader>tv', '<cmd>vsplit | terminal<CR>', { desc = 'Open [T]erminal in [V]ertical split', noremap = true, silent = true })
+vim.keymap.set('n', '<leader>tv', '<cmd>50vsplit | terminal<CR>', { desc = 'Open [T]erminal in [V]ertical split (50 columns)', noremap = true, silent = true })
+
+vim.opt.tabstop = 3
+vim.opt.softtabstop = 3
+vim.opt.shiftwidth = 3
 vim.opt.expandtab = true
 
 -- Diagnostic keymaps
@@ -432,6 +436,12 @@ require('lazy').setup({
         --
         defaults = {
           file_ignore_patterns = { '^node_modules/' },
+        },
+        pickers = {
+          find_files = {
+            hidden = true,
+            no_ignore = true, -- DON'T respect .gitignore
+          },
         },
         -- defaults = {
         --   mappings = {
@@ -900,7 +910,7 @@ require('lazy').setup({
       completion = {
         -- By default, you may press `<c-space>` to show the documentation.
         -- Optionally, set `auto_show = true` to show the documentation after a delay.
-        documentation = { auto_show = false, auto_show_delay_ms = 500 },
+        documentation = { auto_show = false, auto_show_delay_ms = 200 },
       },
 
       sources = {
@@ -946,6 +956,7 @@ require('lazy').setup({
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
+      vim.keymap.set('v', 's', ":<C-U>lua require('mini.surround').add('visual')<CR>", { silent = true, desc = 'Surround selection' })
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
@@ -1010,7 +1021,7 @@ require('lazy').setup({
   -- require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
-  -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
+  -- NOTE2 The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
