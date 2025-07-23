@@ -167,6 +167,7 @@ vim.o.scrolloff = 10
 -- instead raise a dialog asking if you wish to save the current file(s)
 -- See `:help 'confirm'`
 vim.o.confirm = true
+vim.diagnostic.config { virtual_text = false }
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -435,7 +436,7 @@ require('lazy').setup({
         --  All the info you're looking for is in `:help telescope.setup()`
         --
         defaults = {
-          file_ignore_patterns = { '^node_modules/', '^.git' },
+          file_ignore_patterns = { '^node_modules/', '^.git', '^.trigger' },
         },
         pickers = {
           find_files = {
@@ -686,6 +687,7 @@ require('lazy').setup({
       })
 
       -- Diagnostic Config
+
       -- See :help vim.diagnostic.Opts
       vim.diagnostic.config {
         severity_sort = true,
